@@ -1,0 +1,1158 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf460
+{\fonttbl\f0\fnil\fcharset0 Verdana;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red76\green78\blue78;\red41\green0\blue255;\red64\green128\blue0;
+\red0\green0\blue255;}
+\deftab480
+\pard\pardeftab480\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 --\cf2  Copyright \'a9 2009 Adam Cohen-Rose
+\f1 \cf0 \
+\
+
+\f0\b \cf3 property
+\f1\b0 \cf0  
+\f0 \cf4 HandBrakeCLIPath
+\f1 \cf0  
+\f0 :
+\f1  
+\f0 "/usr/local/bin/HandBrakeCLI"
+\f1 \
+
+\f0\b \cf3 property
+\f1\b0 \cf0  
+\f0 \cf4 outputFolder
+\f1 \cf0  
+\f0 :
+\f1  
+\f0 \cf5 missing value
+\f1 \cf0 \
+
+\f0\b \cf3 property
+\f1\b0 \cf0  
+\f0 \cf4 previousPreset
+\f1 \cf0  
+\f0 :
+\f1  
+\f0 ""
+\f1 \
+
+\f0\b \cf3 property
+\f1\b0 \cf0  
+\f0 \cf4 encoderPriority
+\f1 \cf0  
+\f0 :
+\f1  
+\f0 0
+\f1 \
+\
+
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 findThisApp\cf0 ()
+\f1 \
+	
+\f0\b \cf3 tell
+\f1\b0 \cf0  
+\f0 \cf5 application
+\f1 \cf0  
+\f0 "Finder"
+\f1  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 myApp
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 application file
+\f1 \cf0  
+\f0 \cf5 id
+\f1 \cf0  
+\f0 "org.cohen-rose.EyeTVHandBrakeEncoder"
+\f1 \
+	
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \cf4 myApp
+\f1 \cf0 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf4 findThisApp
+\f1 \cf0 \
+\
+
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 findEncoderScriptPath
+\f1 \cf0  
+\f0 \cf5 from
+\f1 \cf0  
+\f0 \cf4 myApp
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 myPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 quoted form
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 POSIX path
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 (\cf4 myApp
+\f1 \cf0  
+\f0\b \cf3 as
+\f1\b0 \cf0  
+\f0 \cf5 string\cf0 )
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 encoderScriptPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 myPath
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 "/Contents/Resources/Scripts/start_encode.sh"
+\f1 \
+	
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \cf4 encoderScriptPath
+\f1 \cf0 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf4 findEncoderScriptPath
+\f1 \cf0 \
+\
+
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 getHandBrakePresets\cf0 ()
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 presetNames
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{\}
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 presetFormats
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{\}
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 savedDelimiters
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 AppleScript\cf0 's
+\f1  
+\f0 \cf5 text item delimiters
+\f1 \cf0 \
+	
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf5 AppleScript\cf0 's
+\f1  
+\f0 \cf5 text item delimiters
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{\cf5 return\cf0 ,
+\f1  
+\f0 "\\\\r"\}
+\f1 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 presetScript
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 HandBrakeCLIPath
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 " --preset-list | grep + | "
+\f1 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 presetScript
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 presetScript
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+			
+\f0 &
+\f1  
+\f0 "sed -E 's/^[[:space:]]+\\\\+ ([^:]+):.*-f +([[:alnum:]]\{3,4\}).*$/\\\\1:\\\\2/'"
+\f1 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf5 result
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 do shell script
+\f1 \cf0  
+\f0 (\cf4 presetScript\cf0 )
+\f1 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 presetResults
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 text items
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf5 result
+\f1 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf5 AppleScript\cf0 's
+\f1  
+\f0 \cf5 text item delimiters
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{":"\}
+\f1 \
+		
+\f0\b \cf3 repeat
+\f1\b0 \cf0  
+\f0\b \cf3 with
+\f1\b0 \cf0  
+\f0 \cf4 preset
+\f1 \cf0  
+\f0\b \cf3 in
+\f1\b0 \cf0  
+\f0 \cf4 presetResults
+\f1 \cf0 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 currentPreset
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 text items
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 preset
+\f1 \cf0 \
+			
+\f0\b \cf3 copy
+\f1\b0 \cf0  
+\f0 \cf5 item
+\f1 \cf0  
+\f0 1
+\f1  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 currentPreset
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 presetNames
+\f1 \cf0 \
+			
+\f0\b \cf3 copy
+\f1\b0 \cf0  
+\f0 \cf5 item
+\f1 \cf0  
+\f0 2
+\f1  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 currentPreset
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 presetFormats
+\f1 \cf0 \
+		
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 repeat
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 on
+\f1\b0 \cf0  
+\f0\b \cf3 error
+\f1\b0 \cf0  
+\f0 \cf4 m
+\f1 \cf0  
+\f0 \cf5 number
+\f1 \cf0  
+\f0 \cf4 n
+\f1 \cf0 \
+		
+\f0 --\cf2 also reset text item delimiters in case of an error: 
+\f1 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf5 AppleScript\cf0 's
+\f1  
+\f0 \cf5 text item delimiters
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 savedDelimiters
+\f1 \cf0 \
+		
+\f0 --\cf2 and resignal the error: 
+\f1 \cf0 \
+		
+\f0\b \cf3 error
+\f1\b0 \cf0  
+\f0 \cf4 m
+\f1 \cf0  
+\f0 \cf5 number
+\f1 \cf0  
+\f0 \cf4 n
+\f1 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \{\cf4 presetNames\cf0 ,
+\f1  
+\f0 \cf4 presetFormats\cf0 \}
+\f1 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf4 getHandBrakePresets
+\f1 \cf0 \
+\
+
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 chooseOutputDirectory\cf0 ()
+\f1 \
+	
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (\cf4 outputFolder
+\f1 \cf0  
+\f0\b \cf3 is
+\f1\b0 \cf0  
+\f0 \cf5 missing value\cf0 )
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 tempOutputFolder
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 (\cf5 path to
+\f1 \cf0  
+\f0 \cf5 movies folder\cf0 )
+\f1 \
+	
+\f0\b \cf3 else
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 tempOutputFolder
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 outputFolder
+\f1 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 if
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 outputFolder
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \'ac
+\f1 \
+			
+\f0 \cf5 choose folder
+\f1 \cf0  
+\f0 \cf5 with prompt
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+				
+\f0 "Where do you want your movies to be exported?"
+\f1  
+\f0 \cf5 default location
+\f1 \cf0  
+\f0 \cf4 tempOutputFolder
+\f1 \cf0 \
+	
+\f0\b \cf3 on
+\f1\b0 \cf0  
+\f0\b \cf3 error
+\f1\b0 \cf0  
+\f0 \cf5 number
+\f1 \cf0  
+\f0 -128
+\f1 \
+		
+\f0 \cf5 display alert
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+			
+\f0 "Cannot continue without export folder"
+\f1  
+\f0 \cf5 as
+\f1 \cf0  
+\f0 \cf5 critical
+\f1 \cf0  
+\f0 \cf5 buttons
+\f1 \cf0  
+\f0 \{"Quit"\}
+\f1  
+\f0 \cf5 default button
+\f1 \cf0  
+\f0 "Quit"
+\f1 \
+		
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \cf5 missing value
+\f1 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 quoted form
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 POSIX path
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 outputFolder
+\f1 \cf0 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf4 chooseOutputDirectory
+\f1 \cf0 \
+\
+
+\f0 (*\cf2 \
+@function	indexOfItemInList\
+@abstract	Determine the index of an item in a given list.\
+@param	 theList The list to search.\
+@param	 theItem The item whose index you want to find.\
+@result	 Returns the index of theItem if an item equal to theItem was found in theList. Returns 0 if an item equal to theItem could not be found.\
+\
+to getIndexOfItemInList(theItem, theList)\
+	local itemIndex -- integer - the index of the specified item. 0 on return if an object equal to theItem can't be found in theList.\
+	\
+	set itemIndex to 0\
+	repeat with i from 1 to (count of items in theList)\
+		if (item i of theList) is equal to theItem then\
+			set itemIndex to i\
+			exit repeat\
+		end if\
+	end repeat\
+	\
+	return itemIndex\
+end getIndexOfItemInList\
+\cf0 *)
+\f1 \
+\
+
+\f0\b \cf3 on
+\f1\b0 \cf0  
+\f0 \cf5 run
+\f1 \cf0 \
+	
+\f0 --\cf2  fetch the recording details
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recPaths
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{\}
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recDates
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \{\}
+\f1 \
+	
+\f0\b \cf3 tell
+\f1\b0 \cf0  
+\f0 \cf5 application
+\f1 \cf0  
+\f0 "EyeTV"
+\f1 \
+		
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recordingList
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 (\cf5 selection
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf5 programs window\cf0 )
+\f1 \
+		
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (\cf5 length
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recordingList
+\f1 \cf0  
+\f0 =
+\f1  
+\f0 0)
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0 \
+			
+\f0 \cf5 display alert
+\f1 \cf0  
+\f0 "Please select at least one recording!"
+\f1 \
+			
+\f0\b \cf3 return
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 if
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 repeat
+\f1\b0 \cf0  
+\f0\b \cf3 with
+\f1\b0 \cf0  
+\f0 \cf4 currentRec
+\f1 \cf0  
+\f0\b \cf3 in
+\f1\b0 \cf0  
+\f0 \cf4 recordingList
+\f1 \cf0 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recLoc
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 (
+\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 location
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf4 currentRec\cf0 )
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 quoted form
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 (
+\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 POSIX path
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recLoc\cf0 )
+\f1 \
+			
+\f0\b \cf3 copy
+\f1\b0 \cf0  
+\f0 \cf4 recPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recPaths
+\f1 \cf0 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 recDate
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 (
+\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 start time
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf4 currentRec\cf0 )
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \{\cf5 year\cf0 :\cf4 y\cf0 ,
+\f1  
+\f0 \cf5 month\cf0 :\cf4 m\cf0 ,
+\f1  
+\f0 \cf5 day\cf0 :\cf4 d\cf0 \}
+\f1  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 recDate
+\f1 \cf0 \
+			
+\f0\b \cf3 tell
+\f1\b0 \cf0  
+\f0 (\cf4 y
+\f1 \cf0  
+\f0 *
+\f1  
+\f0 10000
+\f1  
+\f0 +
+\f1  
+\f0 \cf4 m
+\f1 \cf0  
+\f0 *
+\f1  
+\f0 100
+\f1  
+\f0 +
+\f1  
+\f0 \cf4 d\cf0 )
+\f1  
+\f0\b \cf3 as
+\f1\b0 \cf0  
+\f0 \cf5 string
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 text
+\f1 \cf0  
+\f0 1
+\f1  
+\f0\b \cf3 thru
+\f1\b0 \cf0  
+\f0 4
+\f1  
+\f0 &
+\f1  
+\f0 "-"
+\f1  
+\f0 &
+\f1  
+\f0 \cf5 text
+\f1 \cf0  
+\f0 5
+\f1  
+\f0\b \cf3 thru
+\f1\b0 \cf0  
+\f0 6
+\f1  
+\f0 &
+\f1  
+\f0 "-"
+\f1  
+\f0 &
+\f1  
+\f0 \cf5 text
+\f1 \cf0  
+\f0 7
+\f1  
+\f0\b \cf3 thru
+\f1\b0 \cf0  
+\f0 8
+\f1 \
+			
+\f0\b \cf3 copy
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 result
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recDates
+\f1 \cf0 \
+		
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 repeat
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 tell
+\f1\b0 \cf0 \
+	\
+	
+\f0 --\cf2  choose the encoding preset
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 handBrakePresetsAndFormats
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 getHandBrakePresets\cf0 ()
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 chosenPreset
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 choose from list
+\f1 \cf0  
+\f0 \cf5 item
+\f1 \cf0  
+\f0 1
+\f1  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 handBrakePresetsAndFormats
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+		
+\f0 \cf5 with title
+\f1 \cf0  
+\f0 "Choose an export format:"
+\f1  
+\f0 \cf5 default items
+\f1 \cf0  
+\f0 \{\cf4 previousPreset\cf0 \}
+\f1 \
+	
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (\cf4 chosenPreset
+\f1 \cf0  
+\f0\b \cf3 is
+\f1\b0 \cf0  
+\f0 \cf5 false\cf0 )
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0  
+\f0\b \cf3 return
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 previousPreset
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 chosenPreset
+\f1 \cf0 \
+	
+\f0 (*\cf2 \
+		set formatIndex to getIndexOfItemInList(chosenPreset as text, (item 1 of handBrakePresetsAndFormats))\
+		if (formatIndex = 0) then\
+			error ("Cannot find " & (chosenPreset as text) & " in preset list")\
+		end if\
+		set chosenSuffix to item formatIndex of (item 2 of handBrakePresetsAndFormats)\
+		\cf0 *)
+\f1 \
+	\
+	
+\f0 --\cf2  choose the output directory
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 outputDirectory
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 chooseOutputDirectory\cf0 ()
+\f1 \
+	
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (\cf4 outputDirectory
+\f1 \cf0  
+\f0\b \cf3 is
+\f1\b0 \cf0  
+\f0 \cf5 missing value\cf0 )
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0  
+\f0\b \cf3 return
+\f1\b0 \cf0 \
+	\
+	
+\f0 --\cf2  locate the shell script (within this package)
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 myApp
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 findThisApp\cf0 ()
+\f1 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 encoderScriptPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 findEncoderScriptPath
+\f1 \cf0  
+\f0 \cf5 from
+\f1 \cf0  
+\f0 \cf4 myApp
+\f1 \cf0 \
+	\
+	
+\f0 --\cf2  now call the shell script to put the encoding on the queue
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 ""
+\f1 \
+	
+\f0\b \cf3 repeat
+\f1\b0 \cf0  
+\f0\b \cf3 with
+\f1\b0 \cf0  
+\f0 \cf4 recIdx
+\f1 \cf0  
+\f0\b \cf3 from
+\f1\b0 \cf0  
+\f0 1
+\f1  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 (\cf5 length
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recPaths\cf0 )
+\f1 \
+		
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 encoderPriority
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 encoderPriority
+\f1 \cf0  
+\f0 +
+\f1  
+\f0 1
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 shellResult
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 do shell script
+\f1 \cf0  
+\f0 (\cf4 encoderScriptPath
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 " "
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 HandBrakeCLIPath
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+				
+\f0 &
+\f1  
+\f0 " "
+\f1  
+\f0 &
+\f1  
+\f0 (\cf5 item
+\f1 \cf0  
+\f0 \cf4 recIdx
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recPaths\cf0 )
+\f1  
+\f0 &
+\f1  
+\f0 " "
+\f1  
+\f0 &
+\f1  
+\f0 (\cf5 item
+\f1 \cf0  
+\f0 \cf4 recIdx
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 recDates\cf0 )
+\f1  
+\f0 \'ac
+\f1 \
+				
+\f0 &
+\f1  
+\f0 " '"
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 chosenPreset
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 "' "
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 outputDirectory
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 " priority="
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 encoderPriority\cf0 )
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 \cf4 shellResult
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 \cf5 return
+\f1 \cf0 \
+		
+\f0\b \cf3 on
+\f1\b0 \cf0  
+\f0\b \cf3 error
+\f1\b0 \cf0  
+\f0 \cf4 errorMsg
+\f1 \cf0  
+\f0 \cf5 number
+\f1 \cf0  
+\f0 \cf4 errorNum
+\f1 \cf0 \
+			
+\f0 \cf5 display alert
+\f1 \cf0  
+\f0 \cf4 errorMsg
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 "("
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 errorNum
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 ")"
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 \cf4 errorMsg
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 "("
+\f1  
+\f0 &
+\f1  
+\f0 \cf4 errorNum
+\f1 \cf0  
+\f0 &
+\f1  
+\f0 ")"
+\f1  
+\f0 &
+\f1  
+\f0 \cf5 return
+\f1 \cf0 \
+		
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 repeat
+\f1\b0 \cf0 \
+	
+\f0 \cf5 display dialog
+\f1 \cf0  
+\f0 \cf4 shellResults
+\f1 \cf0  
+\f0 \cf5 with title
+\f1 \cf0  
+\f0 "Started encoding..."
+\f1  
+\f0 \cf5 buttons
+\f1 \cf0  
+\f0 \{"Ok"\}
+\f1  
+\f0 \'ac
+\f1 \
+		
+\f0 \cf5 default button
+\f1 \cf0  
+\f0 \{"Ok"\}
+\f1  
+\f0 \cf5 giving up after
+\f1 \cf0  
+\f0 30
+\f1 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf5 run
+\f1 \cf0 \
+}

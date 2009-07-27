@@ -1,0 +1,45 @@
+Copyright © 2009 Adam Cohen-Rose
+
+This is an Applescript to export EyeTV recordings using HandBrake.
+
+EyeTV (by Elgato <http://www.elgato.com/>) is an excellent piece of software
+that turns a Mac into a Personal Video Recorder. You can record programs using
+a tuner and play them back at any time. However, the built-in compression
+options for saving video are pretty poor. They generally take a long time to
+create poor quality video at an unimpressive compression ratio.
+
+HandBrake (<http://handbrake.fr/>) is an open-source video transcoder. It can
+transcode between many video formats and has built-in presets for compressing
+different kinds of video.
+
+The EyeTV Export with HandBrake script can be added to the EyeTV scripts menu,
+so that you can select recordings in EyeTV and export them using HandBrake.
+The script will prompt you for an encoding preset and an output directory and
+will run one encode at a time until the jobs are complete. If you have Growl
+(also highly recommended -- see <http://growl.info>), the script will announce
+completed encoding processes in a friendly manner (otherwise it will pop up a
+dialog).
+
+INSTRUCTIONS:
+
+1. Put the script in /Library/Application Support/EyeTV/Scripts and restart
+EyeTV (see <http://bit.ly/JdGJB> for details) 2. Download the HandBrake
+Command Line Interface (HandBrakeCLI) and move it into /usr/local/bin/ 3.
+Select one or more recordings and choose "Export with HandBrake" from the
+Scripts menu (just between Window and Help)
+
+LICENSE
+
+The EyeTV Export with HandBrake script is free software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+The EyeTV Export with HandBrake script is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+the EyeTV Export with HandBrake script. If not, see
+<http://www.gnu.org/licenses/>
