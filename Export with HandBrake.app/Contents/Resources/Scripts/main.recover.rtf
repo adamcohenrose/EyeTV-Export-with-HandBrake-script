@@ -5,8 +5,28 @@
 \deftab480
 \pard\pardeftab480\ql\qnatural\pardirnatural
 
-\f0\fs24 \cf0 --\cf2  Copyright \'a9 2009 Adam Cohen-Rose
-\f1 \cf0 \
+\f0\fs24 \cf0 (*\cf2 *******************************************************\
+Copyright \'a9 2009 Adam Cohen-Rose\
+\
+This file is part of the EyeTV Export with HandBrake script.\
+\
+The EyeTV Export with HandBrake script is free software: you can\
+redistribute it and/or modify it under the terms of the GNU\
+General Public License as published by the Free Software\
+Foundation, either version 3 of the License, or (at your option)\
+any later version.\
+\
+The EyeTV Export with HandBrake script is distributed in the hope\
+that it will be useful, but WITHOUT ANY WARRANTY; without even\
+the implied warranty of MERCHANTABILITY or FITNESS FOR A\
+PARTICULAR PURPOSE. See the GNU General Public License for more\
+details.\
+\
+You should have received a copy of the GNU General Public License\
+along with the EyeTV Export with HandBrake script. If not, see\
+<http://www.gnu.org/licenses/>\
+********************************************************\cf0 *)
+\f1 \
 \
 
 \f0\b \cf3 property
@@ -138,6 +158,156 @@
 \f0\b \cf3 end
 \f1\b0 \cf0  
 \f0 \cf4 findEncoderScriptPath
+\f1 \cf0 \
+\
+
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf4 checkHandBrakeCLIPath\cf0 ()
+\f1 \
+	
+\f0\b \cf3 local
+\f1\b0 \cf0  
+\f0 \cf4 foundPath
+\f1 \cf0 \
+	
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 foundPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 false
+\f1 \cf0 \
+	
+\f0\b \cf3 tell
+\f1\b0 \cf0  
+\f0 \cf5 application
+\f1 \cf0  
+\f0 "Finder"
+\f1  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 \cf5 exists
+\f1 \cf0  
+\f0 \cf4 HandBrakeCLIPath
+\f1 \cf0  
+\f0\b \cf3 as
+\f1\b0 \cf0  
+\f0 \cf5 POSIX file
+\f1 \cf0  
+\f0\b \cf3 then
+\f1\b0 \cf0  
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 foundPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 true
+\f1 \cf0 \
+	
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (
+\b \cf3 not
+\f1\b0 \cf0  
+\f0 \cf4 foundPath\cf0 )
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0 \
+		
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 handBrakeCLIAlias
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0 \cf5 choose file
+\f1 \cf0  
+\f0 \cf5 with prompt
+\f1 \cf0  
+\f0 "Please locate HandBrakeCLI"
+\f1 \
+			
+\f0\b \cf3 set
+\f1\b0 \cf0  
+\f0 \cf4 HandBrakeCLIPath
+\f1 \cf0  
+\f0\b \cf3 to
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 quoted form
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0\b \cf3 the
+\f1\b0 \cf0  
+\f0 \cf5 POSIX path
+\f1 \cf0  
+\f0\b \cf3 of
+\f1\b0 \cf0  
+\f0 \cf4 handBrakeCLIAlias
+\f1 \cf0 \
+		
+\f0\b \cf3 on
+\f1\b0 \cf0  
+\f0\b \cf3 error
+\f1\b0 \cf0  
+\f0 \cf5 number
+\f1 \cf0  
+\f0 -128
+\f1 \
+			
+\f0 \cf5 display alert
+\f1 \cf0  
+\f0 \'ac
+\f1 \
+				
+\f0 "Cannot continue without HandBrakeCLI"
+\f1  
+\f0 \cf5 as
+\f1 \cf0  
+\f0 \cf5 critical
+\f1 \cf0  
+\f0 \cf5 buttons
+\f1 \cf0  
+\f0 \{"Quit"\}
+\f1  
+\f0 \cf5 default button
+\f1 \cf0  
+\f0 "Quit"
+\f1 \
+			
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \cf5 false
+\f1 \cf0 \
+		
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 try
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0\b \cf3 if
+\f1\b0 \cf0 \
+	
+\f0\b \cf3 return
+\f1\b0 \cf0  
+\f0 \cf5 true
+\f1 \cf0 \
+
+\f0\b \cf3 end
+\f1\b0 \cf0  
+\f0 \cf4 checkHandBrakeCLIPath
 \f1 \cf0 \
 \
 
@@ -509,30 +679,6 @@
 \f1 \cf0 \
 \
 
-\f0 (*\cf2 \
-@function	indexOfItemInList\
-@abstract	Determine the index of an item in a given list.\
-@param	 theList The list to search.\
-@param	 theItem The item whose index you want to find.\
-@result	 Returns the index of theItem if an item equal to theItem was found in theList. Returns 0 if an item equal to theItem could not be found.\
-\
-to getIndexOfItemInList(theItem, theList)\
-	local itemIndex -- integer - the index of the specified item. 0 on return if an object equal to theItem can't be found in theList.\
-	\
-	set itemIndex to 0\
-	repeat with i from 1 to (count of items in theList)\
-		if (item i of theList) is equal to theItem then\
-			set itemIndex to i\
-			exit repeat\
-		end if\
-	end repeat\
-	\
-	return itemIndex\
-end getIndexOfItemInList\
-\cf0 *)
-\f1 \
-\
-
 \f0\b \cf3 on
 \f1\b0 \cf0  
 \f0 \cf5 run
@@ -798,6 +944,19 @@ end getIndexOfItemInList\
 \f0 --\cf2  choose the encoding preset
 \f1 \cf0 \
 	
+\f0\b \cf3 if
+\f1\b0 \cf0  
+\f0 (\cf4 checkHandBrakeCLIPath\cf0 ()
+\f1  
+\f0\b \cf3 is
+\f1\b0 \cf0  
+\f0 \cf5 false\cf0 )
+\f1  
+\f0\b \cf3 then
+\f1\b0 \cf0  
+\f0\b \cf3 return
+\f1\b0 \cf0 \
+	
 \f0\b \cf3 set
 \f1\b0 \cf0  
 \f0 \cf4 handBrakePresetsAndFormats
@@ -856,15 +1015,6 @@ end getIndexOfItemInList\
 \f1\b0 \cf0  
 \f0 \cf4 chosenPreset
 \f1 \cf0 \
-	
-\f0 (*\cf2 \
-		set formatIndex to getIndexOfItemInList(chosenPreset as text, (item 1 of handBrakePresetsAndFormats))\
-		if (formatIndex = 0) then\
-			error ("Cannot find " & (chosenPreset as text) & " in preset list")\
-		end if\
-		set chosenSuffix to item formatIndex of (item 2 of handBrakePresetsAndFormats)\
-		\cf0 *)
-\f1 \
 	\
 	
 \f0 --\cf2  choose the output directory
