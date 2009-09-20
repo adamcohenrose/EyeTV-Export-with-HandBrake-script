@@ -67,9 +67,9 @@ export priorityarg=$7
 export priority=`echo ${priorityarg} | sed -E "s/^priority=([[:digit:]]+)$/\1/"`
 
 echo "`date`: starting $0"
-sleep 2 # to let other handbrake encoders start
+sleep 5 # to let other handbrake encoders start
 while [ `other_encodes_are_still_running` -gt 0 ]; do
-    sleep 10
+    sleep 30
     echo "`date`: waiting for other encodes to finish"
 done
 
